@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfólio profissional de Gabriel Orlandi de Souza, Desenvolvedor Fullstack especializado em TypeScript, React.js e Node.js.">
+  <meta name="theme-color" content="#090b0f">
+  <title>Gabriel Orlandi de Souza | Desenvolvedor Fullstack</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #090b0f;
+      --bg-soft: #0d1015;
+      --panel: #11151b;
+      --panel-hover: #141a21;
+      --text: #f1f4f7;
+      --muted: #9aa4af;
+      --muted-2: #69737f;
+      --line: rgba(255,255,255,.08);
+      --line-strong: rgba(255,255,255,.14);
+      --accent: #48b8c8;
+      --accent-soft: rgba(72,184,200,.11);
+      --accent-line: rgba(72,184,200,.34);
+      --max: 1120px;
+      --radius: 18px;
+      --nav-h: 72px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--nav-h) + 24px);
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 80% 8%, rgba(72,184,200,.07), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: "Source Sans 3", sans-serif;
+      font-size: 17px;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .25;
+      background-image:
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, black, transparent 72%);
+    }
+
+    ::selection {
+      background: rgba(72,184,200,.25);
+      color: #fff;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .container {
+      width: min(calc(100% - 40px), var(--max));
+      margin-inline: auto;
+    }
+
+    .skip-link {
+      position: fixed;
+      left: 16px;
+      top: -100px;
+      z-index: 1000;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #061014;
+      font-weight: 700;
+      transition: top .2s ease;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 100;
+      height: var(--nav-h);
+      border-bottom: 1px solid transparent;
+      transition: background .3s ease, border-color .3s ease, backdrop-filter .3s ease;
+    }
+
+    .navbar.scrolled {
+      background: rgba(9,11,15,.78);
+      border-color: var(--line);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .nav-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: "Outfit", sans-serif;
+      font-weight: 700;
+      letter-spacing: -.02em;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--accent-line);
+      border-radius: 8px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      background: var(--accent-soft);
+    }
+
+    .nav-links {
+      display: none;
+      list-style: none;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 15px;
+      transition: color .2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--text);
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      align-items: center;
+      padding: 130px 0 90px;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 48px;
+      align-items: center;
+      max-width: 1100px;
+      width: 100%;
+      margin: 15px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 20px;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 26px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Outfit", sans-serif;
+      line-height: 1.08;
+      letter-spacing: -.035em;
+    }
+
+    h1 {
+      max-width: 720px;
+      font-size: clamp(2.9rem, 7.5vw, 5rem);
+      font-weight: 600;
+    }
+
+    .hero-title {
+      margin-top: 18px;
+      color: var(--muted);
+      font-family: "Outfit", sans-serif;
+      font-size: clamp(1.15rem, 2.5vw, 1.55rem);
+      font-weight: 500;
+    }
+
+    .hero-title span {
+      color: var(--accent);
+    }
+
+    .hero-copy {
+      max-width: 620px;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.2rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .button {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 18px;
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+      background: rgba(255,255,255,.025);
+      color: var(--text);
+      font-family: "Source Sans 3", sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      transition: transform .25s ease, border-color .25s ease, background .25s ease, color .25s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent-line);
+      background: var(--accent-soft);
+    }
+
+    .button-primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #061014;
+    }
+
+    .button-primary:hover {
+      background: #66c8d5;
+      border-color: #66c8d5;
+      color: #061014;
+    }
+
+    .button svg,
+    .project-link svg,
+    .footer-link svg {
+      width: 17px;
+      height: 17px;
+      flex: 0 0 auto;
+    }
+
+    .hero-aside {
+      display: none;
+      justify-self: center;
+      width: 205px;
+      aspect-ratio: 1;
+      position: relative;
+    }
+
+    .hero-aside::before,
+    .hero-aside::after {
+      content: "";
+      position: absolute;
+      inset: 15%;
+      border: 1px solid var(--line-strong);
+      transform: rotate(45deg);
+    }
+
+    .hero-aside::after {
+      inset: 28%;
+      border-color: var(--accent-line);
+      transform: rotate(45deg);
+    }
+
+    .hero-code {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      z-index: 2;
+      color: var(--accent);
+      font-family: "Outfit", sans-serif;
+      font-size: 48px;
+      font-weight: 600;
+    }
+
+    .scroll-note {
+      position: absolute;
+      bottom: 28px;
+      left: 0;
+      color: var(--muted-2);
+      font-size: 13px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    /* Sections */
+    section {
+      position: relative;
+      padding: 110px 0;
+    }
+
+    .section-heading {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+
+    .section-label {
+      color: var(--accent);
+      font-family: "Outfit", sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-size: clamp(2.2rem, 6vw, 3.7rem);
+      font-weight: 600;
+    }
+
+    .section-intro {
+      max-width: 650px;
+      color: var(--muted);
+    }
+
+    .about-grid {
+      display: grid;
+      gap: 50px;
+    }
+
+    .about-copy p + p {
+      margin-top: 20px;
+    }
+
+    .about-copy strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .experience {
+      margin-top: 45px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+    }
+
+    .experience-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .experience h3 {
+      font-size: 1.35rem;
+    }
+
+    .experience-period {
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .experience-company {
+      color: var(--muted);
+      margin-bottom: 15px;
+    }
+
+    .experience ul {
+      padding-left: 19px;
+      color: var(--muted);
+    }
+
+    .experience li + li {
+      margin-top: 7px;
+    }
+
+    .skills-panel {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(255,255,255,.035), rgba(255,255,255,.012));
+    }
+
+    .skills-panel h3 {
+      margin-bottom: 22px;
+      font-size: 1.15rem;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .skill {
+      padding: 7px 11px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: rgba(255,255,255,.025);
+      color: #c5ccd3;
+      font-size: 14px;
+      transition: border-color .2s ease, color .2s ease, background .2s ease;
+    }
+
+    .skill:hover {
+      border-color: var(--accent-line);
+      background: var(--accent-soft);
+      color: var(--text);
+    }
+
+    /* Projects */
+    .projects-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .project-card {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      gap: 26px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      transition: transform .3s ease, border-color .3s ease, background .3s ease, box-shadow .3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-line);
+      background: var(--panel-hover);
+      box-shadow: 0 18px 50px rgba(0,0,0,.25);
+    }
+
+    .project-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--accent);
+      opacity: .7;
+    }
+
+    .project-index {
+      color: var(--muted-2);
+      font-family: "Outfit", sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .1em;
+    }
+
+    .project-main {
+      display: grid;
+      gap: 20px;
+    }
+
+    .project-title-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .language-icon {
+      width: 42px;
+      height: 42px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(247,223,30,.25);
+      border-radius: 11px;
+      background: rgba(247,223,30,.08);
+      color: #f7df1e;
+      font-family: "Outfit", sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .project-card h3 {
+      font-size: clamp(1.45rem, 3vw, 2rem);
+      margin-bottom: 5px;
+    }
+
+    .project-subtitle {
+      color: var(--muted-2);
+      font-size: 14px;
+    }
+
+    .project-description {
+      max-width: 760px;
+      color: var(--muted);
+    }
+
+    .project-description strong {
+      color: #d9dfe4;
+      font-weight: 500;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .project-meta span {
+      padding: 5px 9px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: #aeb8c1;
+      font-family: "Source Sans 3", sans-serif;
+      font-size: 13px;
+    }
+
+    .project-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding-top: 5px;
+    }
+
+    .project-status {
+      color: var(--muted-2);
+      font-size: 13px;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      font-size: 15px;
+      font-weight: 600;
+      transition: gap .2s ease, color .2s ease;
+    }
+
+    .project-link:hover {
+      gap: 12px;
+      color: #75d2de;
+    }
+
+    /* Contact */
+    .contact-box {
+      display: grid;
+      gap: 28px;
+      padding: 38px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background:
+        linear-gradient(120deg, rgba(72,184,200,.055), transparent 45%),
+        var(--panel);
+    }
+
+    .contact-box h2 {
+      max-width: 650px;
+    }
+
+    .contact-box p {
+      max-width: 650px;
+      color: var(--muted);
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer {
+      padding: 35px 0 42px;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .footer-copy {
+      color: var(--muted-2);
+      font-size: 14px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--muted);
+      font-size: 14px;
+      transition: color .2s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--accent);
+    }
+
+    .email-note {
+      color: var(--muted-2);
+      font-size: 13px;
+    }
+
+    /* Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 699px) {
+      .hero-grid {
+        width: min(calc(100% - 40px), var(--max));
+      }
+
+      h1 {
+        max-width: 560px;
+        font-size: clamp(2.7rem, 12vw, 4rem);
+      }
+    }
+
+    @media (min-width: 700px) {
+      .container {
+        width: min(calc(100% - 64px), var(--max));
+      }
+
+      .nav-links {
+        display: flex;
+      }
+
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr) 205px;
+        column-gap: 58px;
+      }
+
+      .hero-aside {
+        display: block;
+      }
+
+      .about-grid {
+        grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr);
+        align-items: start;
+      }
+
+      .project-card {
+        grid-template-columns: 65px minmax(0, 1fr);
+        padding: 36px;
+      }
+
+      .project-index {
+        padding-top: 8px;
+      }
+
+      .footer-inner {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    @media (min-width: 960px) {
+      .hero-grid {
+        width: min(calc(100% - 96px), 1040px);
+      }
+
+      .hero {
+        padding-top: 120px;
+      }
+
+      section {
+        padding: 140px 0;
+      }
+
+      .contact-box {
+        padding: 55px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <nav class="navbar" aria-label="Navegação principal">
+    <div class="container nav-inner">
+      <a class="brand" href="#inicio" aria-label="Ir para o início">
+        <span class="brand-mark">GO</span>
+        <span>Gabriel Orlandi</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#projetos">Projetos</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="conteudo">
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="eyebrow">Desenvolvimento Fullstack</div>
+
+          <h1>Gabriel Orlandi de Souza</h1>
+
+          <p class="hero-title">
+            Desenvolvedor Fullstack <span>|</span> TypeScript, React.js, Node.js
+          </p>
+
+          <p class="hero-copy">
+            Desenvolvedor Fullstack desde 2024, focado em criar soluções de alta qualidade,
+            sustentáveis e fáceis de manter. Gosto de transformar problemas em produtos claros,
+            eficientes e preparados para evoluir junto com a equipe.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#projetos">
+              Ver projetos
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6"/>
+              </svg>
+            </a>
+
+            <a class="button" href="https://www.linkedin.com/in/gabriel-orlandi-de-souza-909643103" target="_blank" rel="noopener noreferrer">
+              LinkedIn
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M6.5 8.5A1.75 1.75 0 1 0 6.5 5a1.75 1.75 0 0 0 0 3.5ZM5 10h3v9H5v-9Zm5 0h2.88v1.23h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2 3.6 4.6V19h-3v-4.2c0-1-.02-2.29-1.4-2.29-1.4 0-1.61 1.09-1.61 2.22V19h-3v-9Z"/>
+              </svg>
+            </a>
+
+            <a class="button" href="https://github.com/gabsorli" target="_blank" rel="noopener noreferrer">
+              GitHub
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 .75a11.25 11.25 0 0 0-3.56 21.92c.56.1.77-.24.77-.54v-2.1c-3.14.68-3.8-1.34-3.8-1.34-.51-1.3-1.25-1.64-1.25-1.64-1.02-.7.08-.69.08-.69 1.13.08 1.73 1.16 1.73 1.16 1 1.72 2.62 1.22 3.26.93.1-.72.39-1.22.71-1.5-2.51-.29-5.15-1.25-5.15-5.58 0-1.23.44-2.24 1.16-3.03-.12-.29-.5-1.44.11-3 0 0 .94-.3 3.09 1.16a10.73 10.73 0 0 1 5.62 0c2.15-1.46 3.09-1.16 3.09-1.16.61 1.56.23 2.71.11 3 .72.79 1.16 1.8 1.16 3.03 0 4.34-2.65 5.28-5.17 5.56.41.36.77 1.07.77 2.16v3.2c0 .3.2.65.78.54A11.25 11.25 0 0 0 12 .75Z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-aside reveal" aria-hidden="true">
+          <div class="hero-code">&lt;/&gt;</div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="scroll-note">Role para explorar</div>
+      </div>
+    </section>
+
+    <section id="sobre">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="section-label">01 — Sobre mim</span>
+          <h2>Construir bem é pensar além do código.</h2>
+          <p class="section-intro">
+            Desenvolvimento, colaboração e cuidado com o que acontece depois do deploy.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-copy reveal">
+            <p>
+              Sou <strong>Desenvolvedor Fullstack desde 2024</strong>, comprometido em entregar
+              soluções de alta qualidade, mas que também sejam fáceis de manter pelas próximas
+              equipes. Pra mim, código bom não termina quando funciona: ele precisa fazer sentido,
+              ser compreensível e estar pronto para crescer.
+            </p>
+
+            <p>
+              Minha jornada começou no desenvolvimento de aplicações web e, desde então, venho
+              aprofundando meus conhecimentos em diferentes frameworks, ferramentas e boas práticas.
+              Também participo de comunidades de desenvolvimento, mantendo meus conhecimentos em
+              movimento e compartilhando aprendizados com outros profissionais.
+            </p>
+
+            <p>
+              Na experiência profissional, atuei no desenvolvimento de uma plataforma de jogos
+              online, trabalhando com metodologias ágeis, implementação de novas funcionalidades,
+              testes unitários e otimização de desempenho por meio de filas para processamento
+              assíncrono. É nesse encontro entre tecnologia, clareza e trabalho em equipe que gosto
+              de atuar.
+            </p>
+
+            <div class="experience">
+              <div class="experience-top">
+                <h3>Desenvolvedor Fullstack</h3>
+                <span class="experience-period">MAR 2024 — JUN 2025</span>
+              </div>
+              <p class="experience-company">JoliFox</p>
+              <ul>
+                <li>Desenvolvimento de uma plataforma de jogos online em equipe.</li>
+                <li>Uso de Scrum, Trello, Git e GitHub para organização e versionamento.</li>
+                <li>Implementação de novas features e aplicação de testes unitários.</li>
+                <li>Otimização de desempenho com filas para processamento assíncrono.</li>
+                <li>Atuação com React.js, TypeScript, Next.js, Node.js e MongoDB.</li>
+              </ul>
+            </div>
+          </div>
+
+          <aside class="skills-panel reveal" aria-label="Competências técnicas">
+            <h3>Stack & competências</h3>
+            <div class="skills">
+              <span class="skill">JavaScript</span>
+              <span class="skill">TypeScript</span>
+              <span class="skill">HTML</span>
+              <span class="skill">CSS</span>
+              <span class="skill">Flexbox</span>
+              <span class="skill">Grid</span>
+              <span class="skill">Tailwind</span>
+              <span class="skill">Styled Components</span>
+              <span class="skill">Bootstrap</span>
+              <span class="skill">UX Design</span>
+              <span class="skill">Acessibilidade</span>
+              <span class="skill">Performance</span>
+              <span class="skill">SEO</span>
+              <span class="skill">React.js</span>
+              <span class="skill">Next.js</span>
+              <span class="skill">Node.js</span>
+              <span class="skill">MongoDB</span>
+              <span class="skill">MySQL</span>
+              <span class="skill">Java</span>
+              <span class="skill">Spring Framework</span>
+              <span class="skill">Spring Boot</span>
+              <span class="skill">Git</span>
+              <span class="skill">GitHub</span>
+              <span class="skill">SOLID</span>
+              <span class="skill">Clean Code</span>
+              <span class="skill">Figma</span>
+              <span class="skill">Excel</span>
+              <span class="skill">Scrum</span>
+              <span class="skill">Python</span>
+              <span class="skill">Consumo de APIs</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="projetos">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="section-label">02 — Projetos</span>
+          <h2>Projetos que colocam a lógica em movimento.</h2>
+          <p class="section-intro">
+            Uma seleção de trabalhos públicos que mostra prática, aprendizado e evolução no desenvolvimento web.
+          </p>
+        </div>
+
+        <div class="projects-list">
+          <article class="project-card reveal">
+            <div class="project-index">01</div>
+
+            <div class="project-main">
+              <div class="project-title-row">
+                <div class="language-icon" aria-label="JavaScript">JS</div>
+                <div>
+                  <h3>Jogo da Forca — Challenge 2 Oracle</h3>
+                  <p class="project-subtitle">jogo-da-forca-desafio-2-oracle</p>
+                </div>
+              </div>
+
+              <p class="project-description">
+                Projeto desenvolvido como desafio prático de lógica e desenvolvimento web.
+                O jogo apresenta uma palavra secreta que o jogador precisa descobrir letra por letra,
+                registra tentativas incorretas, desenha progressivamente a estrutura da forca e permite
+                <strong>adicionar novas palavras</strong> ao conjunto de opções.
+              </p>
+
+              <div class="project-meta" aria-label="Tecnologias utilizadas">
+                <span>JavaScript</span>
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>DOM</span>
+                <span>Git</span>
+                <span>GitHub</span>
+              </div>
+
+              <div class="project-footer">
+                <span class="project-status">Projeto público • 2022</span>
+
+                <a class="project-link" href="https://github.com/gabsorli/jogo-da-forca-desafio-2-oracle" target="_blank" rel="noopener noreferrer">
+                  Ver repositório
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                    <path d="M5 12h14M13 6l6 6-6 6"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato">
+      <div class="container">
+        <div class="contact-box reveal">
+          <div>
+            <span class="section-label">03 — Contato</span>
+            <h2 style="margin-top: 12px;">Vamos transformar uma boa ideia em algo que funcione de verdade.</h2>
+          </div>
+
+          <p>
+            Se você procura alguém para construir interfaces, integrar APIs, desenvolver aplicações
+            ou trabalhar de ponta a ponta em uma solução, fique à vontade para conhecer meu trabalho
+            e entrar em contato pelas minhas redes profissionais.
+          </p>
+
+          <div class="contact-links">
+            <a class="button button-primary" href="http://www.linkedin.com/in/gabriel-orlandi-de-souza-909643103" target="_blank" rel="noopener noreferrer">
+              Conectar no LinkedIn
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M6.5 8.5A1.75 1.75 0 1 0 6.5 5a1.75 1.75 0 0 0 0 3.5ZM5 10h3v9H5v-9Zm5 0h2.88v1.23h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2 3.6 4.6V19h-3v-4.2c0-1-.02-2.29-1.4-2.29-1.4 0-1.61 1.09-1.61 2.22V19h-3v-9Z"/>
+              </svg>
+            </a>
+
+            <a class="button" href="https://github.com/gabsorli" target="_blank" rel="noopener noreferrer">
+              Explorar GitHub
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 .75a11.25 11.25 0 0 0-3.56 21.92c.56.1.77-.24.77-.54v-2.1c-3.14.68-3.8-1.34-3.8-1.34-.51-1.3-1.25-1.64-1.25-1.64-1.02-.7.08-.69.08-.69 1.13.08 1.73 1.16 1.73 1.16 1 1.72 2.62 1.22 3.26.93.1-.72.39-1.22.71-1.5-2.51-.29-5.15-1.25-5.15-5.58 0-1.23.44-2.24 1.16-3.03-.12-.29-.5-1.44.11-3 0 0 .94-.3 3.09 1.16a10.73 10.73 0 0 1 5.62 0c2.15-1.46 3.09-1.16 3.09-1.16.61 1.56.23 2.71.11 3 .72.79 1.16 1.8 1.16 3.03 0 4.34-2.65 5.28-5.17 5.56.41.36.77 1.07.77 2.16v3.2c0 .3.2.65.78.54A11.25 11.25 0 0 0 12 .75Z"/>
+              </svg>
+            </a>
+          </div>
+
+          <p class="email-note">
+            E-mail profissional não foi identificado nas informações públicas consultadas.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p class="footer-copy">
+        © <span id="year"></span> Gabriel Orlandi de Souza. Desenvolvedor Fullstack.
+      </p>
+
+      <div class="footer-links">
+        <a class="footer-link" href="http://www.linkedin.com/in/gabriel-orlandi-de-souza-909643103" target="_blank" rel="noopener noreferrer">
+          LinkedIn
+        </a>
+        <a class="footer-link" href="https://github.com/gabsorli" target="_blank" rel="noopener noreferrer">
+          GitHub
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const navbar = document.querySelector(".navbar");
+      const year = document.querySelector("#year");
+      const reveals = document.querySelectorAll(".reveal");
+
+      year.textContent = new Date().getFullYear();
+
+      const updateNavbar = () => {
+        navbar.classList.toggle("scrolled", window.scrollY > 18);
+      };
+
+      updateNavbar();
+      window.addEventListener("scroll", updateNavbar, { passive: true });
+
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              obs.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.12,
+          rootMargin: "0px 0px -40px 0px"
+        });
+
+        reveals.forEach((element) => observer.observe(element));
+      } else {
+        reveals.forEach((element) => element.classList.add("visible"));
+      }
+    })();
+  </script>
+</body>
+</html>
